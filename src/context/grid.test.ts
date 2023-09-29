@@ -1,13 +1,21 @@
-import {Grid, TileState} from "./grid.ts"
+import {Grid} from "./grid.ts"
 
 describe("Grid class data structure",  () => {
-  test("it should be create a properly sized grid", () => {
+  test("it should be create a properly square sized grid", () => {
     let b = new Grid(5, 5, 0)
     let cells = []
     for(let cell of b.iterateCoords()) {
       cells.push(cell)
     }
     expect(cells.length).toEqual(25)
+  })
+  test("it sould create a properly sized rectangle grid", () => {
+    let b = new Grid(5, 4, 0)
+    let cells = []
+    for(let cell of b.iterateCoords()) {
+      cells.push(cell)
+    }
+    expect(cells.length).toEqual(20)
   })
   test("it should use the proper initial value", () => {
     let b = new Grid(2, 2, 1)
@@ -16,7 +24,7 @@ describe("Grid class data structure",  () => {
     }
   })
   test("it should find all its neighbors but not itself", () => {
-    let b = new Grid<TileState>(5,5, 1)
+    let b = new Grid(5,5, 1)
     let expected_neighbors = [
       "0,0", "0,1", "0,2",
       "1,0",        "1,2",
@@ -31,7 +39,7 @@ describe("Grid class data structure",  () => {
     expect(neighbor_count).toEqual(expected_neighbors.length)
   })
   test("it should respect bounds when finding neighbors upper left", () => {
-    let b = new Grid<TileState>(5,5, 1)
+    let b = new Grid(5,5, 1)
     let expected_neighbors = [
              "0,1",
       "1,0", "1,1"
@@ -45,7 +53,7 @@ describe("Grid class data structure",  () => {
     expect(neighbor_count).toEqual(expected_neighbors.length)
   })
   test("it should respect bounds when finding neighbors lower right", () => {
-    let b = new Grid<TileState>(5,5, 1)
+    let b = new Grid(5,5, 1)
     let expected_neighbors = [
       "3,3", "3,4",
       "4,3"
@@ -59,7 +67,7 @@ describe("Grid class data structure",  () => {
     expect(neighbor_count).toEqual(expected_neighbors.length)
   })
   test("it should allow getting and setting to proper coords", () => {
-    let b = new Grid<TileState>(3,3,0)
+    let b = new Grid(3,3,0)
     let i = 1
     for(let coord of b.iterateCoords()) {
       b.set(coord, i)
@@ -72,11 +80,11 @@ describe("Grid class data structure",  () => {
     }
   })
   test("it should throw an error if set is used out of bounds", () => {
-    let b = new Grid<TileState>(3,3,0)
+    let b = new Grid(3,3,0)
     expect(() => {b.set([5,5], 3)}).toThrow()
   })
   test("it should throw an error if get is used out of bounds", () => {
-    let b = new Grid<TileState>(3,3,0)
+    let b = new Grid(3,3,0)
     expect(() => {b.get([5,5])}).toThrow()
   })
 })
