@@ -3,22 +3,13 @@ import {Grid, Coord} from "./grid.ts"
 export type TileState = number | "bomb"
 export type MaskState = "fog" | "clear" | "flag"
 export type GameState = "active" | "boom" | "win"
-export type Color = "white" | "green" | "yellow" | "orange" | "red"
 export interface TileInfo {
   value: TileState | MaskState,
-  color: Color,
   coord: Coord
 }
 
 function getRandomInt(max: number) {
   return Math.floor(Math.random() * max)
-}
-function colorFromValue(value:number): Color {
-  const colors: Array<Color> = ["white", "green", "yellow", "orange"]
-  if(value >= colors.length) {
-    return colors[colors.length -1]
-  }
-  return colors[value]
 }
 
 export class MineBoard {
@@ -139,21 +130,15 @@ export class MineBoard {
       }
       let maskState: MaskState = this.#mask.get(coord)
       let info: TileInfo
-      let color:Color = "red"
       if(maskState == "clear") {
         let value = this.#tiles.get(coord)
-        if(value != "bomb") {
-          color = colorFromValue(value)
-        }
         info = {
           value: value,
-          color: color,
           coord: coord
         }
       } else {
         info = {
           value: maskState,
-          color: color,
           coord: coord
         }
       }

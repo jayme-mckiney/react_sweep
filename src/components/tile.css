@@ -1,6 +1,50 @@
 .tile {
   display: inline-block;
-/*  padding: 1em;*/
-  width: 3em;
-  height: 3em;
+  width: 50px;
+  height: 50px;
+  border:1px black solid;
+}
+.tile svg {
+  width: 50px;
+  height: 50px;
+}
+.tile.fog {
+    border:2px outset #999;
+    -webkit-box-shadow: 2px 2px 7px rgba(0,0,0,0.4);
+    -moz-box-shadow: 2px 2px 7px rgba(0,0,0,0.4);
+    width: 48px;
+    height: 48px;
+}
+.tile.flag {
+
+}
+.tile.bomb {
+
+}
+.tile.zero {
+
+}
+.tile.one {
+
+}
+.tile.two {
+
+}
+.tile.three {
+
+}
+.tile.four {
+
+}
+.tile.five {
+
+}
+.tile.six {
+
+}
+.tile.seven {
+
+}
+.tile.eight {
+
 }

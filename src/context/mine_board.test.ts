@@ -7,7 +7,7 @@ describe("MineBoard minesweeaper tile data structure", () => {
     expect(rows[0].length).toEqual(5)
     expect(rows.length).toEqual(4)
   })
-  test("it should clear the fog and properly number and color codes", () => {
+  test("it should clear the fog and properly number", () => {
     let board = new MineBoard(3,3,3, ["bomb",0,0,0,0,0,0,0,"bomb"])
     board.clearFog()
     let rows = Array.from(board.iterateRows())
@@ -17,10 +17,6 @@ describe("MineBoard minesweeaper tile data structure", () => {
     expect(rowOneValues).toEqual(["bomb",1,0])
     expect(rowTwoValues).toEqual([1,2,1])
     expect(rowThreeValues).toEqual([0,1,"bomb"])
-    expect(rows[0][0]['color']).toEqual('red')
-    expect(rows[0][2]['color']).toEqual('white')
-    expect(rows[0][1]['color']).toEqual('green')
-    expect(rows[1][1]['color']).toEqual('yellow')
   })
   test("it should count all adjacent tiles for bombs", () => {
     let board = new MineBoard(3,3,3, ["bomb","bomb","bomb","bomb",0,"bomb","bomb","bomb","bomb"])
@@ -28,7 +24,7 @@ describe("MineBoard minesweeaper tile data structure", () => {
     let rows = Array.from(board.iterateRows())
     expect(rows[1][1]['value']).toEqual(8)
   })
-  test("it should handle larger numbering and colors", () => {
+  test("it should handle larger numbering", () => {
     let board = new MineBoard(3,3,3, ["bomb","bomb","bomb",0,0,0,0,0,"bomb"])
     board.clearFog()
     let rows = Array.from(board.iterateRows())
@@ -38,8 +34,6 @@ describe("MineBoard minesweeaper tile data structure", () => {
     expect(rowOneValues).toEqual(["bomb","bomb","bomb"])
     expect(rowTwoValues).toEqual([2,4,3])
     expect(rowThreeValues).toEqual([0,1,"bomb"])
-    expect(rows[1][1]['color']).toEqual('orange')
-    expect(rows[1][2]['color']).toEqual('orange')
   })
   test("it should assign the right amount of bombs", () => {
     let board = new MineBoard(3,3,4)
