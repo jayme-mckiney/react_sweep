@@ -14,9 +14,9 @@ function App() {
 
   const handleRightClick = (event: MouseEvent) => {
     event.preventDefault()
-    if(event.target.attributes['aria-contextmenu-coord'] && gameState == 'active') {
-      console.log(event.target.attributes['aria-contextmenu-coord'].value)
-      let values: Array<number> = event.target.attributes['aria-contextmenu-coord'].value.split(',').map((x: string) => parseInt(x))
+    if(event.target.attributes['data-contextmenu-coord'] && gameState == 'active') {
+      console.log(event.target.attributes['data-contextmenu-coord'].value)
+      let values: Array<number> = event.target.attributes['data-contextmenu-coord'].value.split(',').map((x: string) => parseInt(x))
       let coord: Coord = [values[0], values[1]]
       board.current.flagCoord(coord)
       updateAll()

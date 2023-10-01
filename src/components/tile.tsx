@@ -57,8 +57,8 @@ export const Tile = ({tile, clickHandler}: {tile: TileInfo, clickHandler: Functi
   }
   const SVG = TileInfoToSVG[tile['value']]
   return (
-    <div className={`tile ${className}`} aria-contextmenu-coord={tile['coord']} onClick={onClickHandle}>
-     <SVG aria-contextmenu-coord={tile['coord']} onClick={onClickHandle} />
+    <div className={`tile ${className}`} data-contextmenu-coord={tile['coord']} onClick={onClickHandle}>
+     <SVG data-contextmenu-coord={tile['coord']} onClick={onClickHandle} />
     </div>
   )
 }

@@ -7,10 +7,12 @@
 }
 .statusbar .score {
   flex-grow: 3;
-  display: inline-block;
+  display: flex;
+  justify-content: right;
 }
 .statusbar .smiley-button {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
   width: 30px;
   height: 30px;
   border:3px outset #888;
@@ -24,6 +26,6 @@
 }
 .statusbar .mines-remaining {
   flex-grow: 3;
-  display: inline-block;
-
+  display: flex;
+  justify-content: left;
 }

@@ -8,18 +8,22 @@ import './board.css'
 
 export const Board = ({rows, clickHandler}: {rows: Array<Array<TileInfo>>, clickHandler: Function}) => {
   let jsxRows = new Array()
+  let rowNum = 0
   for(let row of rows) {
     let tiles = new Array()
+    let tileNum = 0
     for(let tile of row) {
       tiles.push((
-        <Tile clickHandler={clickHandler} tile={tile} />
+        <Tile key={`tile${tileNum}`} clickHandler={clickHandler} tile={tile} />
       ))
+      tileNum ++
     }
     jsxRows.push((
-      <div className="row">
+      <div key={`row${rowNum}`} className="row">
         {tiles}
       </div>
     ))
+    rowNum ++
   }
 
   return (

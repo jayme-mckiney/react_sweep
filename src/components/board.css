@@ -5,3 +5,9 @@
   margin: 0;
   display: flex;
 }
+/*@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');*/
+@font-face {
+          font-family: "Source Code Pro";
+          font-weight: normal;
+          src: url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap')
+        }
