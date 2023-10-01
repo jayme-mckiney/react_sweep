@@ -1,0 +1,29 @@
+.statusbar {
+  display: flex;
+  align-content: space-between;
+  background: #DDD;
+  border:3px outset #888;
+  padding: 3px;
+}
+.statusbar .score {
+  flex-grow: 3;
+  display: inline-block;
+}
+.statusbar .smiley-button {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border:3px outset #888;
+  -webkit-box-shadow: 2px 2px 7px rgba(0,0,0,0.4);
+  -moz-box-shadow: 2px 2px 7px rgba(0,0,0,0.4);
+  cursor: pointer;
+}
+.statusbar .smiley-button svg {
+  width:  100%;
+  height: 100%;
+}
+.statusbar .mines-remaining {
+  flex-grow: 3;
+  display: inline-block;
+
+}

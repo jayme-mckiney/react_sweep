@@ -17,6 +17,7 @@ export class MineBoard {
   #height: number;
   #bombCount: number;
   #flagged: number;
+  #score: number;
   #gameState: GameState;
   #tiles: Grid<TileState>;
   #mask: Grid<MaskState>;
@@ -26,6 +27,7 @@ export class MineBoard {
     this.#bombCount = bombCount
     this.#gameState = "active"
     this.#flagged = 0
+    this.#score = 0
     this.#mask = new Grid<MaskState>(this.#width, this.#height, "fog")
     this.#tiles = new Grid<TileState>(this.#width, this.#height, 0)
     if(initialTileState.length == 0) {
@@ -38,6 +40,15 @@ export class MineBoard {
         i ++
       }
     }
+    this.#numberTiles()
+  }
+  reset() {
+    this.#gameState = "active"
+    this.#flagged = 0
+    this.#score = 0
+    this.#mask = new Grid<MaskState>(this.#width, this.#height, "fog")
+    this.#tiles = new Grid<TileState>(this.#width, this.#height, 0)
+    this.#plantBombs()
     this.#numberTiles()
   }
   #plantBombs() {
@@ -73,6 +84,12 @@ export class MineBoard {
       }
     }
     this.gameStateCheck()
+  }
+  unflagged() {
+    return (this.#bombCount - this.#flagged)
+  }
+  score() {
+    return this.#score
   }
   gameStateCheck() {
     if(this.#gameState == 'boom' || this.#flagged != this.#bombCount) {
