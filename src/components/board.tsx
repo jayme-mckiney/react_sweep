@@ -6,7 +6,7 @@ import './board.css'
 
 
 
-export const Board = ({rows, clickHandler}: {rows: Array<Array<TileInfo>>, clickHandler: Function}) => {
+export const Board = ({rows, clickHandler, doFlag}: {rows: Array<Array<TileInfo>>, clickHandler: Function, doFlag: Function}) => {
   let jsxRows = new Array()
   let rowNum = 0
   for(let row of rows) {

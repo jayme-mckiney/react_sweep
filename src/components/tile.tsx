@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react';
+import { MouseEvent, TouchEvent, useRef } from 'react';
 import {
   TileInfo,
   // TileState,
@@ -46,11 +46,26 @@ const TileInfoToSVG = {
   "fog": Fog
 }
 
-export const Tile = ({tile, clickHandler}: {tile: TileInfo, clickHandler: Function}) => {
+export const Tile = ({tile, clickHandler, doFlag}: {tile: TileInfo, clickHandler: Function, doFlag: Function}) => {
+  const touchTimer = useRef()
+
+  const touchStartHandle = (e) => {
+    e.preventDefault()
+    touchTimer.current = setTimeout(() => {
+      doFlag(tile['coord'])
+    }, 700)
+  }
+
+  const touchEndHandle = (e) => {
+    e.preventDefault()
+    clearTimeout(touchTimer.current)
+  }
+
   const onClickHandle = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault()
     clickHandler(tile['coord'])
   }
+
   let className =  NumeralTileClass[tile['value']]
   if(className == undefined) {
     className = tile['value']
@@ -58,7 +73,7 @@ export const Tile = ({tile, clickHandler}: {tile: TileInfo, clickHandler: Functi
   const SVG = TileInfoToSVG[tile['value']]
   return (
     <div className={`tile ${className}`} data-contextmenu-coord={tile['coord']} onClick={onClickHandle}>
-     <SVG data-contextmenu-coord={tile['coord']} onClick={onClickHandle} />
+     <SVG data-contextmenu-coord={tile['coord']} onTouchStart={touchStartHandle} onTouchEnd={touchEndHandle} onClick={onClickHandle} />
     </div>
   )
 }

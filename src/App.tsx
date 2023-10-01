@@ -23,6 +23,11 @@ function App() {
     }
   }
 
+  const doFlag = (coord:Coord) => {
+    board.current.flagCoord(coord)
+    updateAll()
+  }
+
   useEffect(() => {
     document.addEventListener("contextmenu", handleRightClick)
     return () => {
@@ -50,7 +55,7 @@ function App() {
   return (
     <>
       <StatusBar minesRemaining={minesRemaining} score={score} gameState={gameState} clickHandler={smileyClick} />
-      <Board clickHandler={gameState == 'active'? check : (e) => {e.preventDefault()}} rows={rows} />
+      <Board doFlag={doFlag} clickHandler={gameState == 'active'? check : (e) => {e.preventDefault()}} rows={rows} />
     </>
   )
 }
