@@ -55,7 +55,7 @@ function App() {
   return (
     <>
       <StatusBar minesRemaining={minesRemaining} score={score} gameState={gameState} clickHandler={smileyClick} />
-      <Board doFlag={doFlag} clickHandler={gameState == 'active'? check : (e) => {e.preventDefault()}} rows={rows} />
+      <Board doFlag={doFlag} doCheck={gameState == 'active'? check : (e) => {e.preventDefault()}} rows={rows} />
     </>
   )
 }

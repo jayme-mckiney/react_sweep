@@ -31,7 +31,6 @@ const Digit = ({number}: {number: string}) => {
 export const DigitalBar = ({number, minLength}: {number: number, minLength: number}) => {
   const numberStringArray: Array<string> = `${number}`.split("")
   let digits = numberStringArray.map((x, i) => {return <Digit key={`Digit${i}`} number={NumeralDigit[parseInt(x)]} />})
-  console.log(digits)
   while(digits.length < minLength) {
     digits.unshift(<Digit number="zero" />)
   }

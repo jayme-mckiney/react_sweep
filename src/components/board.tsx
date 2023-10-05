@@ -6,7 +6,7 @@ import './board.css'
 
 
 
-export const Board = ({rows, clickHandler, doFlag}: {rows: Array<Array<TileInfo>>, clickHandler: Function, doFlag: Function}) => {
+export const Board = ({rows, doCheck, doFlag}: {rows: Array<Array<TileInfo>>, doCheck: Function, doFlag: Function}) => {
   let jsxRows = new Array()
   let rowNum = 0
   for(let row of rows) {
@@ -14,7 +14,7 @@ export const Board = ({rows, clickHandler, doFlag}: {rows: Array<Array<TileInfo>
     let tileNum = 0
     for(let tile of row) {
       tiles.push((
-        <Tile key={`tile${tileNum}`} clickHandler={clickHandler} tile={tile} />
+        <Tile key={`tile${tileNum}`} doCheck={doCheck} doFlag={doFlag} tile={tile} />
       ))
       tileNum ++
     }

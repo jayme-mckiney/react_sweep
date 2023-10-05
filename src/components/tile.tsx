@@ -1,4 +1,6 @@
 import { MouseEvent, TouchEvent, useRef } from 'react';
+import useLongPress from '../hooks/long_touch.ts'
+
 import {
   TileInfo,
   // TileState,
@@ -46,25 +48,24 @@ const TileInfoToSVG = {
   "fog": Fog
 }
 
-export const Tile = ({tile, clickHandler, doFlag}: {tile: TileInfo, clickHandler: Function, doFlag: Function}) => {
-  const touchTimer = useRef()
-
-  const touchStartHandle = (e) => {
-    e.preventDefault()
-    touchTimer.current = setTimeout(() => {
-      doFlag(tile['coord'])
-    }, 700)
-  }
-
-  const touchEndHandle = (e) => {
-    e.preventDefault()
-    clearTimeout(touchTimer.current)
-  }
+export const Tile = ({tile, doCheck, doFlag}: {tile: TileInfo, doCheck: Function, doFlag: Function}) => {
 
   const onClickHandle = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault()
-    clickHandler(tile['coord'])
+    doCheck(tile['coord'])
   }
+
+  const handleClicks = (isLongPress: boolean) => {
+    if(isLongPress) {
+      doFlag(tile['coord'])
+      console.log('flag')
+    }
+    else {
+      doCheck(tile['coord'])
+    }
+  }
+  const {handlers: otherHandlers} = useLongPress(handleClicks)
+
 
   let className =  NumeralTileClass[tile['value']]
   if(className == undefined) {
@@ -72,8 +73,8 @@ export const Tile = ({tile, clickHandler, doFlag}: {tile: TileInfo, clickHandler
   }
   const SVG = TileInfoToSVG[tile['value']]
   return (
-    <div className={`tile ${className}`} data-contextmenu-coord={tile['coord']} onClick={onClickHandle}>
-     <SVG data-contextmenu-coord={tile['coord']} onTouchStart={touchStartHandle} onTouchEnd={touchEndHandle} onClick={onClickHandle} />
+    <div className={`tile ${className}`} data-contextmenu-coord={tile['coord']} >
+     <SVG data-contextmenu-coord={tile['coord']} {...otherHandlers} />
     </div>
   )
 }

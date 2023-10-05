@@ -113,6 +113,7 @@ export class MineBoard {
       this.#mask.set(coord, "fog")
       this.#flagged --
     }
+    this.gameStateCheck()
   }
   checkCoord(coord: Coord) {
     if(this.#mask.get(coord) == 'fog') {
