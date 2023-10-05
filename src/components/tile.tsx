@@ -50,11 +50,6 @@ const TileInfoToSVG = {
 
 export const Tile = ({tile, doCheck, doFlag}: {tile: TileInfo, doCheck: Function, doFlag: Function}) => {
 
-  const onClickHandle = (event: MouseEvent<HTMLDivElement>) => {
-    event.preventDefault()
-    doCheck(tile['coord'])
-  }
-
   const handleClicks = (isLongPress: boolean) => {
     if(isLongPress) {
       doFlag(tile['coord'])
@@ -66,6 +61,11 @@ export const Tile = ({tile, doCheck, doFlag}: {tile: TileInfo, doCheck: Function
   }
   const {handlers: otherHandlers} = useLongPress(handleClicks)
 
+  const rightClickHandle = (e) => {
+    e.preventDefault()
+    doFlag(tile['coord'])
+  }
+
 
   let className =  NumeralTileClass[tile['value']]
   if(className == undefined) {
@@ -73,8 +73,8 @@ export const Tile = ({tile, doCheck, doFlag}: {tile: TileInfo, doCheck: Function
   }
   const SVG = TileInfoToSVG[tile['value']]
   return (
-    <div className={`tile ${className}`} data-contextmenu-coord={tile['coord']} >
-     <SVG data-contextmenu-coord={tile['coord']} {...otherHandlers} />
+    <div className={`tile ${className}`} onContextMenu={rightClickHandle} {...otherHandlers} >
+     <SVG data-contextmenu-coord={tile['coord']} />
     </div>
   )
 }

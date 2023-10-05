@@ -3,7 +3,7 @@ import { useState, useRef } from 'react'
 export default function useLongPress(handle: Function) {
 
   const timerRef = useRef();
-  const isLongPress = useRef();
+  const isLongPress: boolean = useRef(false);
 
   function startPressTimer() {
     isLongPress.current = false;
