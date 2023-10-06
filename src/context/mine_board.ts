@@ -91,6 +91,15 @@ export class MineBoard {
   score() {
     return this.#score
   }
+  #countScore() {
+    let score: number = 0
+    for(let coord of this.#tiles.iterateCoords()) {
+      if(this.#mask.get(coord) == 'clear') {
+        score += this.#tiles.get(coord)
+      }
+    }
+    this.#score = score
+  }
   gameStateCheck() {
     if(this.#gameState == 'boom' || this.#flagged != this.#bombCount) {
       return
@@ -122,6 +131,9 @@ export class MineBoard {
         this.#gameState = "boom"
       } else if(this.#tiles.get(coord) == 0) {
         this.#colapseNeighbors(coord)
+      }
+      if(this.#gameState != 'boom') {
+        this.#countScore()
       }
       this.gameStateCheck()
     }
